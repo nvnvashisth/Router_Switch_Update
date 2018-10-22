@@ -47,7 +47,7 @@ for i in ontap:
     for line in ssh_stdout:
         list_of_words = line.split()
         if(len(list_of_words) > 0):
-            version[i.replace(".muccbc.hq.netapp.com","").lower()]=list_of_words[2].replace(":","")
+            version[i.replace("##Looking for format which you want to search for ","").lower()]=list_of_words[2].replace(":","")
 
     #Cluster node and IP Information
     for line in ssh_stdout:
@@ -120,10 +120,10 @@ for i in ontap:
 
 
 
-db = MySQLdb.connect(host="cbc-ssp-db-01.muccbc.hq.netapp.com", 
+db = MySQLdb.connect(host="#Database Connection", 
                      user="admin",
-                     passwd="dcmuc100@NetApp01",
-                     db="MUCCBC_DB")
+                     passwd="#Enter password",
+                     db="#Database name")
 
 cur = db.cursor()
 up = db.cursor()
@@ -149,7 +149,7 @@ for row in cur.fetchall():
             up.execute("UPDATE nodes SET isflash = %s WHERE name = %s",(flash_Info[flash],flash))
             db.commit()
 
-cur.execute("SELECT name FROM systems")
+cur.execute("SELECT name FROM table")
 for row in cur.fetchall():
     for ver in version:
         if(row[0].lower()==ver):
